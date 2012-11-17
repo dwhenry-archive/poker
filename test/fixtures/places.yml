@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  game: 
+  player: 
+  points: 
+
+two:
+  game: 
+  player: 
+  points: 

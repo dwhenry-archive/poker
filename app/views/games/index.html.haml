@@ -1,0 +1,19 @@
+%h1 Games
+
+= link_to 'Create New Game', new_game_path
+
+%table
+  %thead
+    %tr
+      %td
+        Location
+      %td
+        Played On
+  %tbody
+    - @games.each do |game|
+      %tr
+        %td
+          Location
+        %td
+          Played On
+

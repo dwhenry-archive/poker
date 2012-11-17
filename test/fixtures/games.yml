@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  location: 
+  on: 2012-11-13
+
+two:
+  location: 
+  on: 2012-11-13

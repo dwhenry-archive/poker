@@ -1,0 +1,8 @@
+%p.label
+  Location
+= f.collection_select(:location_id, Location.order(:name), 'name', 'id')
+= link_to 'Create New Location', new_location_path
+
+%p.label
+  On
+= f.text_field(:on)
