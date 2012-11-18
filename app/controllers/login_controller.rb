@@ -4,11 +4,12 @@ class LoginController < ApplicationController
   end
 
   def create
-    if @player = Player.create(name: params[:name], passowrd: params[:password])
+    if @player = Player.login(params[:name], params[:password])
       session[:user_id] = @player.id
       redirect_last_or_root
     else
-      render :new
+      @player ||= Player.new(params.slice(:name))
+      render :new, :status => 404
     end
   end
 end

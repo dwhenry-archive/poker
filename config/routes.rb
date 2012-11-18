@@ -5,8 +5,8 @@ Poker::Application.routes.draw do
 
   resources :player, :execpt => [:index]
 
-  get "login/new"
-  get "login/create"
+  get "login/new", :as => 'login'
+  post "login/create", :as => 'login'
 
   root :to => 'games#index'
   # The priority is based upon order of creation:

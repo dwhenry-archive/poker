@@ -1,8 +1,10 @@
-%p.label
-  Location
-= f.collection_select(:location_id, Location.order(:name), 'name', 'id')
-= link_to 'Create New Location', new_location_path
+%div
+  = f.label :location_id, 'Location'
+  = f.collection_select(:location_id, Location.order(:name), 'name', 'id')
+  = link_to 'Create New Location', new_location_path
+  = error_for(f, :location_id, 'Location')
 
-%p.label
-  On
-= f.text_field(:on)
+%div
+  = f.label :on, 'Played on'
+  = f.text_field(:on)
+  = error_for(f, :on, 'Played on')

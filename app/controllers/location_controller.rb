@@ -1,4 +1,6 @@
 class LocationController < ApplicationController
+  before_filter :require_login
+
   def new
   end
 
