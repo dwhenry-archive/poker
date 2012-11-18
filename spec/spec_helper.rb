@@ -42,10 +42,10 @@ def login_user(user=nil)
   visit login_now_path(:id => user)
 end
 
-def create_new_game(location)
+def create_new_game(location_name)
   visit new_game_path
 
-  select location.name, :from => 'Location'
+  select location_name, :from => 'Location'
   fill_in 'Played on', :with => '24 Mar 2012'
 
   click_on 'Create'
