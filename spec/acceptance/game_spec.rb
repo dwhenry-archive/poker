@@ -33,6 +33,17 @@ feature 'game creation and setup' do
     page.should have_content 'The Crown'
   end
 
+  scenario 'newly created location has creator as owner' do
+    visit new_game_path
+    click_on 'Create new location'
+
+    fill_in 'Name', :with => 'The Crown'
+    click_on 'Create'
+
+    location = Location.last
+    location.owning_players.should eq [user]
+  end
+
   scenario 'can be created for an existing location' do
     location = Location.create(:name => 'The Bar')
 

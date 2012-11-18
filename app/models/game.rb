@@ -11,11 +11,15 @@ class Game < ActiveRecord::Base
 
 
   def non_players
-    []
+    (Player.all - players)
   end
 
   def save_with_player(player)
-    save && self.game_players.create(:player_id => player.id)
+    ActiveRecord::Base.transaction do
+      save!
+      self.players << player
+      self
+    end
   end
 
   def on_is_a_date

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121118042251) do
+ActiveRecord::Schema.define(:version => 20121118123822) do
 
   create_table "game_players", :force => true do |t|
     t.integer  "game_id"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(:version => 20121118042251) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "owners", :force => true do |t|
+    t.integer  "location_id"
+    t.integer  "player_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "owners", ["location_id"], :name => "index_owners_on_location_id"
+  add_index "owners", ["player_id"], :name => "index_owners_on_player_id"
 
   create_table "places", :force => true do |t|
     t.integer  "game_id"

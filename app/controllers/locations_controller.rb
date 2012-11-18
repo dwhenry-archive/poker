@@ -7,7 +7,8 @@ class LocationsController < ApplicationController
 
   def create
     @location = Location.new(params[:location])
-    if @location.save
+    if @location.save_with_owner(current_user)
+
       redirect_to new_game_path(:game => {:location_id => @location.id})
     else
       render :new
