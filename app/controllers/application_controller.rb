@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   attr_accessor :current_user
+  helper_method :current_user
 
   def require_login
     unless session[:user_id] && @current_user = Player.find_by_id(session[:user_id])

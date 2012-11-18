@@ -44,8 +44,17 @@ feature 'game creation and setup' do
     location.owning_players.should eq [user]
   end
 
+  scenario 'can not see location to create game unless owner' do
+    location = Location.create(:name => 'Not my Bar')
+
+    visit games_path
+    click_on 'Create new game'
+
+    page.should_not have_content 'Not my Bar'
+  end
+
   scenario 'can be created for an existing location' do
-    location = Location.create(:name => 'The Bar')
+    location = Location.create(:name => 'The Bar', :owning_players => [user])
 
     visit games_path
     click_on 'Create new game'
@@ -58,7 +67,7 @@ feature 'game creation and setup' do
   end
 
   scenario 'new game automatically has user creator added player' do
-    location = Location.create(:name => 'The Bar')
+    location = Location.create(:name => 'The Bar', :owning_players => [user])
 
     create_new_game(location.name)
 

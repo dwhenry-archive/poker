@@ -1,10 +1,10 @@
 %div
   = f.label :location_id, 'Location'
-  = f.collection_select(:location_id, Location.order(:name), 'id', 'name')
+  = f.collection_select(:location_id, Location.owner_by(current_user).order(:name), 'id', 'name')
   = link_to 'Create new location', new_location_path
   = error_for(f, :location_id, 'Location')
 
 %div
   = f.label :on, 'Played on'
-  = f.text_field(:on)
+  = f.text_field(:on, :type => 'date')
   = error_for(f, :on, 'Played on')
