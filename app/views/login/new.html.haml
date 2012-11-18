@@ -2,7 +2,7 @@
 
 = form_tag login_path do
   %div
-    = label_tag :name
+    = label_tag :name, 'Username'
     = text_field_tag :name, @player.name
 
   %div
@@ -16,5 +16,5 @@
 
   .buttons
     = submit_tag 'Login'
-    = link_to 'Create New', new_player_path
+    = link_to 'Create new player', new_player_path
 

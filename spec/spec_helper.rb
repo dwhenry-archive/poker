@@ -36,3 +36,8 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+def login_user
+  player = Player.create(:name => 'User', :password => 'password', :password_confirmation => 'password')
+  visit login_now_path(:id => player)
+end

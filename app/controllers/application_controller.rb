@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   attr_accessor :current_user
 
   def require_login
-    unless session[:user_id] && @current_user = PLayer.find_by_id(session[:user_id])
+    unless session[:user_id] && @current_user = Player.find_by_id(session[:user_id])
       session[:last] = request.referer
       redirect_to '/login/new'
     end

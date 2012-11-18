@@ -1,6 +1,6 @@
 %div
   = f.label :location_id, 'Location'
-  = f.collection_select(:location_id, Location.order(:name), 'name', 'id')
+  = f.collection_select(:location_id, Location.order(:name), 'id', 'name')
   = link_to 'Create New Location', new_location_path
   = error_for(f, :location_id, 'Location')
 

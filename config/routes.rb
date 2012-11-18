@@ -1,14 +1,18 @@
 Poker::Application.routes.draw do
   resources :games
 
-  resources :location, :except => [:index]
+  resources :locations, :except => [:index]
 
-  resources :player, :execpt => [:index]
+  resources :players, :execpt => [:index]
 
   get "login/new", :as => 'login'
   post "login/create", :as => 'login'
+  unless Rails.env.production?
+    get "login/now", :as => 'login_now'
+  end
 
   root :to => 'games#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

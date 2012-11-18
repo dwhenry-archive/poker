@@ -12,4 +12,10 @@ class LoginController < ApplicationController
       render :new, :status => 404
     end
   end
+
+  def now
+    raise 'for test and dev only' if Rails.env.production?
+    session[:user_id] = params[:id]
+    redirect_last_or_root
+  end
 end

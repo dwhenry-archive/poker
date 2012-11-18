@@ -1,0 +1,20 @@
+%div
+  = f.label :name, 'Username'
+  = f.text_field(:name)
+  = error_for(f, :name, 'Username')
+
+%div
+  = f.label :nickname, 'Nickname'
+  = f.text_field(:nickname)
+  = error_for(f, :nickname, 'Nickname')
+
+%div
+  = f.label :password
+  = f.text_field(:password)
+  = error_for(f, :password, 'Password')
+
+%div
+  = f.label :password_confirmation, 'Password confirmation'
+  = f.text_field(:password_confirmation)
+  = error_for(f, :password_confirmation, 'Password confirmation')
+
