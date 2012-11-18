@@ -1,21 +1,52 @@
 %h1
-  Game Details
-
-%p.details
-  At:
-  = @game.location.name
-%p.details
-  On:
+  = "'#{@game.location.name}'"
+  .small
+    on
   = @game.on.strftime('%d %b %y')
 
-%h3 Players
+- if @game.buyin_chips
+  %p.details
+    .label Buy-In:
+    = number_with_delimiter @game.buyin_chips
+    chips for
+    = "£#{@game.buyin_amount}"
 
-#players
-  - @game.players.each do |player|
-    .player
-      = player.name
-  - @game.non_players.each do |player|
-    .non_player
-      = player.name
+- if @game.rebuy_chips
+  %p.details
+    .label Rebuy:
+    = number_with_delimiter @game.rebuy_chips
+    chips for
+    = "£#{@game.rebuy_amount}"
+
+%table#players
+  %thead
+    %tr
+      %th
+        Players
+  %tbody
+    - @game.game_players.each do |game_player|
+      - player = game_player.player
+      %tr.player
+        %td
+          .actions
+            = link_to 'X', game_player_path(@game, player), :title => 'Remove player', :method => 'delete'
+            = link_to 'A', game_player_addon_path(@game, player), :title => 'Remove player', :method => 'post'
+            = link_to 'E', game_player_exit_path(@game, player), :title => 'Remove player', :method => 'put'
+          = player.name
+          = "(#{game_player.position})" if game_player.position
+  %thead
+    %tr
+      %th
+        Non-Players
+  %tbody
+    - @game.non_players.each do |player|
+      %tr.non-player
+        %td
+          .actions
+            = link_to 'B', game_players_path(@game, :id => player), :title => 'Add player (buy-in)', :method => 'post'
+          = player.name
 
 
+.buttons
+  = link_to 'Edit', edit_game_path(@game), :class => 'button'
+  = link_to 'Games', games_path, :class => 'button'

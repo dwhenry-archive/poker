@@ -1,5 +1,10 @@
 Poker::Application.routes.draw do
-  resources :games
+  resources :games do
+    resources :players, :only => [:create, :destroy], :controller => 'game_players' do
+      post :addon
+      put :exit
+    end
+  end
 
   resources :locations, :except => [:index]
 

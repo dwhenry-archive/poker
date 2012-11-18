@@ -1,19 +1,19 @@
 %h1 Games
 
-= link_to 'Create new game', new_game_path
+= link_to 'Create new game', new_game_path, :class => 'button'
 
 %table
   %thead
     %tr
-      %td
+      %th
         Location
-      %td
+      %th
         Played On
   %tbody
     - @games.each do |game|
       %tr
         %td
-          Location
+          = link_to game.location.name, game_path(game)
         %td
-          Played On
+          = game.on.strftime('%d %b %Y')
 

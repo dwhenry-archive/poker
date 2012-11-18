@@ -50,3 +50,18 @@ def create_new_game(location_name)
 
   click_on 'Create'
 end
+
+def visit_existing_game(user)
+  location = Location.create(:name => 'The Bar', :owning_players => [user])
+  game = Game.new(
+    location_id: location.id,
+    on: Date.today,
+    buyin_chips: 1000,
+    buyin_amount: 10,
+    rebuy_chips: 500,
+    rebuy_amount: 5
+  )
+  game.save_with_player(user)
+
+  visit game_path(game)
+end

@@ -8,3 +8,21 @@
   = f.label :on, 'Played on'
   = f.text_field(:on, :type => 'date')
   = error_for(f, :on, 'Played on')
+
+%h2
+  Buy-In
+%div
+  = f.label :buyin_chips, 'Chips'
+  = f.text_field(:buyin_chips, :type => 'number', :min => 1000, :max => 100000, :step => 1000)
+
+  = f.label :buyin_amount, 'Amount'
+  = f.text_field(:buyin_amount, :type => 'number', :min => 0, :max => 20, :step => 1)
+
+%h2
+  Rebuy
+%div
+  = f.label :rebuy_chips, 'Chips'
+  = f.text_field(:rebuy_chips, :type => 'number', :min => 500, :max => 100000, :step => 500)
+
+  = f.label :rebuy_amount, 'Amount'
+  = f.text_field(:rebuy_amount, :type => 'number', :min => 0, :max => 20, :step => 1)

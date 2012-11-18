@@ -11,13 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121118123822) do
+ActiveRecord::Schema.define(:version => 20121118190515) do
+
+  create_table "chips", :force => true do |t|
+    t.integer  "game_player_id"
+    t.integer  "chips"
+    t.integer  "amount"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "chips", ["game_player_id"], :name => "index_chips_on_game_player_id"
 
   create_table "game_players", :force => true do |t|
     t.integer  "game_id"
     t.integer  "player_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "position"
   end
 
   add_index "game_players", ["game_id"], :name => "index_game_players_on_game_id"
@@ -26,8 +37,12 @@ ActiveRecord::Schema.define(:version => 20121118123822) do
   create_table "games", :force => true do |t|
     t.integer  "location_id"
     t.date     "on"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "buyin_chips"
+    t.integer  "buyin_amount"
+    t.integer  "rebuy_chips"
+    t.integer  "rebuy_amount"
   end
 
   add_index "games", ["location_id"], :name => "index_games_on_location_id"
