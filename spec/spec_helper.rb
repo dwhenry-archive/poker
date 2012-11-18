@@ -37,7 +37,16 @@ RSpec.configure do |config|
   config.order = "random"
 end
 
-def login_user
-  player = Player.create(:name => 'User', :password => 'password', :password_confirmation => 'password')
-  visit login_now_path(:id => player)
+def login_user(user=nil)
+  user ||= Player.create(:name => 'User', :password => 'password', :password_confirmation => 'password')
+  visit login_now_path(:id => user)
+end
+
+def create_new_game(location)
+  visit new_game_path
+
+  select location.name, :from => 'Location'
+  fill_in 'Played on', :with => '24 Mar 2012'
+
+  click_on 'Create'
 end

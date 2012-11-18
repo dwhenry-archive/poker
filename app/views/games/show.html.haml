@@ -1,0 +1,21 @@
+%h1
+  Game Details
+
+%p.details
+  At:
+  = @game.location.name
+%p.details
+  On:
+  = @game.on.strftime('%d %b %y')
+
+%h3 Players
+
+#players
+  - @game.players.each do |player|
+    .player
+      = player.name
+  - @game.non_players.each do |player|
+    .non_player
+      = player.name
+
+

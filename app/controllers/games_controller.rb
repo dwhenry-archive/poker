@@ -1,13 +1,17 @@
 class GamesController < ApplicationController
   before_filter :require_login
 
+  def show
+    @game = Game.find(params[:id])
+  end
+
   def new
     @game = Game.new
   end
 
   def create
     @game = Game.new(params[:game])
-    if @game.save
+    if @game.save_with_player(current_user)
       redirect_to game_path(@game)
     else
       render :new
