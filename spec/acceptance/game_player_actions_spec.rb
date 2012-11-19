@@ -44,7 +44,8 @@ feature 'Game Player actions' do
   end
 
   scenario 'can see summary of all player stats' do
-    game_one, game_two, game_three = [create(:game), create(:game), create(:game)]
+    games = [create(:game), create(:game), create(:game)]
+    game_one, game_two, game_three = games
     games.each { |game| game.players << user }
 
     find('td', :text => user.name).click_on('PS')
@@ -62,7 +63,7 @@ feature 'Game Player actions' do
     find('td', :text => user.name).click_on('E')
 
     within('.player td', :text => user.name) do
-      page.should have_content("#{user.name} (1)")
+      page.should have_content("placed 1/1")
     end
   end
 
@@ -71,7 +72,7 @@ feature 'Game Player actions' do
     find('td', :text => user.name).click_on('E')
 
     within('.player td', :text => user.name) do
-      page.should have_content("#{user.name} (2)")
+      page.should have_content("placed 2/2")
     end
   end
 

@@ -10,13 +10,17 @@ FactoryGirl.define do
     rebuy_amount   5
 
     after(:create) do |game|
-      game.players += game.location.owning_players
+      game.location.owning_players.each do |player|
+        game.players << player
+      end
     end
   end
 
   factory :location do
     sequence(:name) { |n| "Location #{n}" }
-    owning_players [player]
+    after(:create) do |location|
+      location.owning_players << create(:player)
+    end
   end
 
   factory :player do

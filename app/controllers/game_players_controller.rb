@@ -28,6 +28,10 @@ class GamePlayersController < ApplicationController
     redirect_to game_path(@game)
   end
 
+  def stats
+    @game_player = @game.game_players.detect{|gp| gp.player == @player}
+  end
+
 private
 
   def load_game

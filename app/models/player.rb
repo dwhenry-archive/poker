@@ -48,11 +48,22 @@ private
   end
 
   def chip_count(chips, still_playing=true)
+    total_chips = chips.sum(&:chips)
     if still_playing
-      "#{chips.last.chips}/#{chips.sum(&:chips)} chips"
+      "#{format(chips.last.chips)}/#{format(total_chips)} chips"
     else
-      "0/#{chips.sum(&:chips)}"
+      "0/#{format(total_chips)}"
     end
+  end
+
+  def format(num)
+    num.to_s.
+        reverse.
+        split('').
+        in_groups_of(3, false).
+        map{|n| n.join }.
+        join(',').
+        reverse
   end
 
   def matching_password

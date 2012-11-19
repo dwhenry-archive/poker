@@ -3,6 +3,7 @@ Poker::Application.routes.draw do
     resources :players, :only => [:create, :destroy], :controller => 'game_players' do
       post :addon
       put :exit
+      get :stats
     end
   end
 
