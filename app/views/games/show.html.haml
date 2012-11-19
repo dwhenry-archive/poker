@@ -5,18 +5,27 @@
   = @game.on.strftime('%d %b %y')
 
 - if @game.buyin_chips
-  %p.details
-    .label Buy-In:
+  .details
+    .label (B) Buy-In:
     = number_with_delimiter @game.buyin_chips
     chips for
     = "£#{@game.buyin_amount}"
 
 - if @game.rebuy_chips
-  %p.details
-    .label Rebuy:
+  .details
+    .label
+      (A) Addon:
     = number_with_delimiter @game.rebuy_chips
     chips for
     = "£#{@game.rebuy_amount}"
+
+.details
+  .label
+    (E) Out of chips
+
+.details
+  .label
+    (X) Remove player
 
 %table#players
   %thead
@@ -24,16 +33,15 @@
       %th
         Players
   %tbody
-    - @game.game_players.each do |game_player|
-      - player = game_player.player
+    - @game.players.each do |player|
       %tr.player
         %td
           .actions
             = link_to 'X', game_player_path(@game, player), :title => 'Remove player', :method => 'delete'
             = link_to 'A', game_player_addon_path(@game, player), :title => 'Remove player', :method => 'post'
             = link_to 'E', game_player_exit_path(@game, player), :title => 'Remove player', :method => 'put'
-          = player.name
-          = "(#{game_player.position})" if game_player.position
+          = player.details(@game).join('<br/>').html_safe
+
   %thead
     %tr
       %th

@@ -44,9 +44,18 @@ feature 'Game Player actions' do
   end
 
   scenario 'can see summary of all player stats' do
+    game_one, game_two, game_three = [create(:game), create(:game), create(:game)]
+    games.each { |game| game.players << user }
+
     find('td', :text => user.name).click_on('PS')
 
-
+    rows = page.find('tbody').all('tr')
+    cells = rows.map{ |row| row.all('td').map(&:strip) }
+    cells.should eq [
+      [game_one.location.name,   game_one.on, :a],
+      [game_two.location.name,   game_two.on, :b],
+      [game_three.location.name, game_three.on, :c]
+    ]
   end
 
   scenario 'can exit a player from the game' do
