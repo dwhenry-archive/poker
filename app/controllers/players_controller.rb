@@ -24,4 +24,12 @@ class PlayersController < ApplicationController
 
   def update
   end
+
+  def stats
+    @player = Player.find(params[:player_id])
+    @game_players = @player.player_games.
+                            includes({:game => :location}, :player).
+                            order('games."on" desc').
+                            all
+  end
 end

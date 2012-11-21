@@ -1,6 +1,7 @@
 class GamePlayersController < ApplicationController
   before_filter :require_login
-  before_filter :load_game
+  before_filter :load_game, :except => [:index, :create]
+  before_filter :load_game_with_player, :only => [:create]
 
   def create
     @game.players += [@player]
@@ -15,27 +16,43 @@ class GamePlayersController < ApplicationController
   end
 
   def exit
-    game_player = @game.game_players.detect{|gp| gp.player == @player}
-    game_player.update_attributes(:position => @game.game_players.reject(&:position).count)
+    @player.exit_game(@game)
 
     redirect_to game_path(@game)
   end
 
   def addon
-    game_player = @game.game_players.detect{|gp| gp.player == @player}
-    game_player.chips.create(:chips => @game.rebuy_chips, :amount => @game.rebuy_amount)
+    @player.add_rebuy_chips(@game)
 
     redirect_to game_path(@game)
   end
 
-  def stats
-    @game_player = @game.game_players.detect{|gp| gp.player == @player}
+  def index
+    @game = Game.find(params[:game_id])
+    @non_players = Player.where(['id not in (?)', @game.players.map(&:id)])
   end
 
 private
 
   def load_game
     @game = Game.find(params[:game_id])
-    @player = Player.find(params[:id] || params[:player_id])
+    @player = Player.find(player_id)
+  end
+
+  def load_game_with_player
+    @game = Game.find(params[:game_id])
+    if player_id
+      @player = Player.find(player_id)
+    else
+      @player = Player.create(
+        name: "#{params[:guest_name]} (Guest)",
+        password: 'password',
+        password_confirmation: 'password'
+      )
+    end
+  end
+
+  def player_id
+    params[:id] || params[:player_id]
   end
 end

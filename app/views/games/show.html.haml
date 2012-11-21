@@ -37,26 +37,14 @@
       %tr.player
         %td
           .actions
-            = link_to 'X', game_player_path(@game, player), :title => 'Remove player', :method => 'delete'
-            = link_to 'A', game_player_addon_path(@game, player), :title => 'Remove player', :method => 'post'
-            = link_to 'E', game_player_exit_path(@game, player), :title => 'Remove player', :method => 'put'
-            = link_to 'PS', game_player_stats_path(@game, player), :title => 'Player stats', :method => 'get'
+            = link_to 'A', game_player_addon_path(@game, player), :title => 'Buy Addon', :method => 'post'
+            = link_to 'E', game_player_exit_path(@game, player), :title => 'Exit Game', :method => 'put'
+            = link_to 'PS', player_stats_path(player), :title => 'Player stats', :method => 'get'
           = player.details(@game).join('<br/>').html_safe
 
-  %thead
-    %tr
-      %th
-        Non-Players
-  %tbody
-    - @game.non_players.each do |player|
-      %tr.non-player
-        %td
-          .actions
-            = link_to 'B', game_players_path(@game, :id => player), :title => 'Add player (buy-in)', :method => 'post'
-            = link_to 'PS', game_player_stats_path(@game, player), :title => 'Player stats', :method => 'get'
-          = player.name
 
-
+.buttons
+  = link_to 'Change player list', game_players_path(@game), :class => 'button'
 .buttons
   = link_to 'Edit', edit_game_path(@game), :class => 'button'
   = link_to 'Games', games_path, :class => 'button'

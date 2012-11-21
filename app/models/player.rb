@@ -8,7 +8,7 @@ class Player < ActiveRecord::Base
   has_many :player_games, :class_name => 'GamePlayer'
 
   def self.login(name, password)
-    user = find_by_name(name)
+    user = where(["name like ? or nickname like ?", name, name]).first
     if user && user.password == password
       user
     end
@@ -24,7 +24,7 @@ class Player < ActiveRecord::Base
   end
 
   def details(game)
-    game_player = player_games.detect{ |pg| pg.game == game }
+    game_player = player_game(game)
     chips = game_player.chips
 
     str = []
@@ -41,7 +41,24 @@ class Player < ActiveRecord::Base
     str
   end
 
+  def add_buyin_chips(game)
+    player_game(game).add_buyin_chips
+  end
+
+  def add_rebuy_chips(game)
+    player_game(game).add_rebuy_chips
+  end
+
+  def exit_game(game)
+    player_game(game).exit_game
+  end
+
 private
+
+  def player_game(game)
+    player_games.detect{ |pg| pg.game == game }
+  end
+
 
   def placed(game, game_player)
     "placed #{game_player.position}/#{game.players.count}"

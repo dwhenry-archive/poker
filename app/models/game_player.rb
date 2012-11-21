@@ -11,4 +11,14 @@ class GamePlayer < ActiveRecord::Base
       chips.create(chips: game.buyin_chips, amount: game.buyin_amount)
     end
   end
+
+  def add_rebuy_chips
+    if game.rebuy_chips
+      chips.create(chips: game.rebuy_chips, amount: game.rebuy_amount)
+    end
+  end
+
+  def exit_game
+    update_attributes(:position => game.game_players.reject(&:position).count)
+  end
 end

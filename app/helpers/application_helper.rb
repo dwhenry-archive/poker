@@ -7,4 +7,17 @@ module ApplicationHelper
       end
     end
   end
+
+
+  def average_me(set, block)
+    values = set.map(&block).select{|a| a}
+    return '-' if values.empty?
+    values.sum / values.count
+  end
+
+  def sum_me(set, block)
+    values = set.map(&block).select{|a| a}
+    return '-' if values.empty?
+    values.sum
+  end
 end

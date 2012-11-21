@@ -1,15 +1,16 @@
 Poker::Application.routes.draw do
   resources :games do
-    resources :players, :only => [:create, :destroy], :controller => 'game_players' do
+    resources :players, :only => [:create, :destroy, :index], :controller => 'game_players' do
       post :addon
       put :exit
-      get :stats
     end
   end
 
   resources :locations, :except => [:index]
 
-  resources :players, :execpt => [:index]
+  resources :players, :execpt => [:index] do
+    get :stats
+  end
 
   get "login/new", :as => 'login'
   post "login/create", :as => 'login'

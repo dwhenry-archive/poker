@@ -1,0 +1,43 @@
+%h1
+  Player for:
+  = "'#{@game.location.name}'"
+  .small
+    on
+  = @game.on.strftime('%d %b %y')
+
+
+%table#players
+  %thead
+    %tr
+      %th
+        Players
+  %tbody
+    - @game.players.each do |player|
+      %tr.player
+        %td
+          .actions
+            = link_to 'Remove', game_player_path(@game.id, player), :title => 'Remove player', :method => 'delete'
+          = player.name
+    %tr.player
+      %td
+        = form_tag url: game_players_path(@game) do
+          .actions
+            = submit_tag 'Add'
+          = label_tag :guest_name, 'Guest player name'
+          = text_field_tag :guest_name, params[:guest_name]
+
+%table#players
+  %thead
+    %tr
+      %th
+        Players
+  %tbody
+    - @non_players.each do |player|
+      %tr.player
+        %td
+          .actions
+            = link_to 'Add', game_players_path(@game, player_id: player.id), :title => 'Remove player', :method => 'post'
+          = player.name
+
+.buttons
+  = link_to 'Back', game_path(@game), :class => 'button'
