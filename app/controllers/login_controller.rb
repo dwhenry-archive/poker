@@ -13,6 +13,11 @@ class LoginController < ApplicationController
     end
   end
 
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_path
+  end
+
   def now
     raise 'for test and dev only' if Rails.env.production?
     session[:user_id] = params[:id]

@@ -13,7 +13,9 @@ Poker::Application.routes.draw do
   end
 
   get "login/new", :as => 'login'
-  post "login/create", :as => 'login'
+  post "login" => 'login#create', :as => 'login'
+  match "logout" => 'login#destroy', :as => 'logout'
+
   unless Rails.env.production?
     get "login/now", :as => 'login_now'
   end
