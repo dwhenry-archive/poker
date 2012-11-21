@@ -28,7 +28,7 @@ class Player < ActiveRecord::Base
     chips = game_player.chips
 
     str = []
-    str << name
+    str << identify
     if game_player.position
       if chips.empty?
         str << "(#{placed(game, game_player)})"
@@ -51,6 +51,17 @@ class Player < ActiveRecord::Base
 
   def exit_game(game)
     player_game(game).exit_game
+  end
+
+  def identify
+    nickname || name
+  end
+
+  def full_identify
+    str = ''
+    str << name
+    str << " (#{nickname})" if nickname
+    str
   end
 
 private

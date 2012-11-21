@@ -4,13 +4,6 @@
     on
   = @game.on.strftime('%d %b %y')
 
-- if @game.buyin_chips
-  .details
-    .label (B) Buy-In:
-    = number_with_delimiter @game.buyin_chips
-    chips for
-    = "£#{@game.buyin_amount}"
-
 - if @game.rebuy_chips
   .details
     .label
@@ -25,7 +18,7 @@
 
 .details
   .label
-    (X) Remove player
+    (PS) Player Stats
 
 %table#players
   %thead
@@ -38,8 +31,10 @@
         %td
           .actions
             = link_to 'A', game_player_addon_path(@game, player), :title => 'Buy Addon', :method => 'post'
+            |
             = link_to 'E', game_player_exit_path(@game, player), :title => 'Exit Game', :method => 'put'
-            = link_to 'PS', player_stats_path(player), :title => 'Player stats', :method => 'get'
+            |
+            = link_to 'PS', player_stats_path(player, :from => request.env['REQUEST_URI']), :title => 'Player stats', :method => 'get'
           = player.details(@game).join('<br/>').html_safe
 
 

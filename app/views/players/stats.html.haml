@@ -1,32 +1,34 @@
 %h1
-  = @player.name
+  = "#{@player.identify}'s"
   Stats
 
 %table
   %thead
     %tr
-      %td Location
-      %td On
-      %td Position
-      %td Chips
-      %td Cost
+      %th Location
+      %th On
+      %th Position
+      %th Chips
+      %th Cost
 
   %tbody
     - @game_players.each do |game_player|
       %tr
         %td= game_player.game.location.name
-        %td= game_player.game.on.strftime('%d %b %Y')
-        %td= game_player.position
-        %td= number_with_delimiter game_player.chips.sum(:chips)
-        %td= number_with_delimiter game_player.chips.sum(:amount)
+        %td.center= game_player.game.on.strftime('%d %b %Y')
+        %td.center= game_player.position
+        %td.center= number_with_delimiter game_player.chips.sum(:chips)
+        %td.center= number_with_delimiter game_player.chips.sum(:amount)
 
   %tfoot
     %tr
-      %td Average
       %td
-      %td= average_me(@game_players, lambda{|gp| gp.position})
-      %td= number_with_delimiter average_me(@game_players, lambda{|gp| gp.chips.sum(:chips) })
       %td
+      %td.center= average_me(@game_players, lambda{|gp| gp.position})
+      %td.center= number_with_delimiter average_me(@game_players, lambda{|gp| gp.chips.sum(:chips) })
+      %td.center
         = average_me(@game_players, lambda{|gp| gp.chips.sum(:amount) })
-        = "(#{sum_me(@game_players, lambda{|gp| gp.chips.sum(:amount) })})"
+        = "/ #{sum_me(@game_players, lambda{|gp| gp.chips.sum(:amount) })}"
 
+.buttons
+  = link_to 'Back', params[:from], :class => 'button'
