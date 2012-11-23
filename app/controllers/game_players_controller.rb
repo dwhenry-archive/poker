@@ -32,6 +32,10 @@ class GamePlayersController < ApplicationController
     @non_players = Player.where(['id not in (?)', @game.players.map(&:id)])
   end
 
+  def show
+    @game_player = @player.player_game(@game)
+  end
+
 private
 
   def load_game

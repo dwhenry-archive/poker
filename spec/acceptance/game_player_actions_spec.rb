@@ -68,7 +68,7 @@ feature 'Game Player actions' do
       [game_one.location.name,   game_one.on.strftime('%d %b %Y'),   '', '1,500', '15'],
       [game_two.location.name,   game_two.on.strftime('%d %b %Y'),   '', '1,000', '0'],
       [game_three.location.name, game_three.on.strftime('%d %b %Y'), '2', '1,000', '10'],
-      ["Average",                "",                                 "2", "1,125", "8 (35)"]
+      ["",                       "",                                 "2", "1,125", "8 / 35"]
     ]
   end
 

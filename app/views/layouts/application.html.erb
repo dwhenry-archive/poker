@@ -14,7 +14,7 @@
   <section id='main'>
     <% if current_user %>
       <div id='login_details'>
-        Login as: <%= link_to current_user.identify, player_stats_path(current_user) %>
+        <%= link_to current_user.identity, player_stats_path(current_user) %>
         |
         <%= link_to 'Logout', logout_path(method: 'delete') %>
       </div>

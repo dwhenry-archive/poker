@@ -23,6 +23,5 @@ feature 'player creation and login' do
     click_on 'Login'
 
     page.should have_content 'Games'
-
   end
 end

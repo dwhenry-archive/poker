@@ -1,0 +1,21 @@
+%h1
+  = @player.identity
+  @
+%h1
+  = @game.location.name
+  .small
+    on
+  = @game.on.strftime('%d %b %Y')
+
+Current chips
+= @game_player.current_chips
+
+.buttons
+  = link_to '+100', chips_path(id: @game_player.id, change: 100), class: 'button chips', method: 'put', :'data-chips' => 100
+  = link_to '+1,000', chips_path(id: @game_player.id, change: 1000), class: 'button chips', method: 'put', :'data-chips' => 1000
+  = link_to '+10,000', chips_path(id: @game_player.id, change: 10000), class: 'button chips', method: 'put', :'data-chips' => 10000
+
+.buttons
+  = link_to '-100', chips_path(id: @game_player.id, change: -100), class: 'button chips', method: 'put', :'data-chips' => -100
+  = link_to '-1,000', chips_path(id: @game_player.id, change: -1000), class: 'button chips', method: 'put', :'data-chips' => -1000
+  = link_to '-10,000', chips_path(id: @game_player.id, change: -10000), class: 'button chips', method: 'put', :'data-chips' => -10000

@@ -1,10 +1,12 @@
 Poker::Application.routes.draw do
   resources :games do
-    resources :players, :only => [:create, :destroy, :index], :controller => 'game_players' do
+    resources :players, :only => [:create, :destroy, :index, :show], :controller => 'game_players' do
       post :addon
       put :exit
     end
   end
+
+  match 'chips/:id' => 'game_players#chips', :as => 'chips'
 
   resources :locations, :except => [:index]
 

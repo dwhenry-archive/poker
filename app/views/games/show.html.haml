@@ -35,7 +35,7 @@
             = link_to 'E', game_player_exit_path(@game, player), :title => 'Exit Game', :method => 'put'
             |
             = link_to 'PS', player_stats_path(player, :from => request.env['REQUEST_URI']), :title => 'Player stats', :method => 'get'
-          = player.details(@game).join('<br/>').html_safe
+          = link_to player.details(@game).join('<br/>').html_safe, game_player_path(@game, player)
 
 
 .buttons

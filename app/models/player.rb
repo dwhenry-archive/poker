@@ -28,7 +28,7 @@ class Player < ActiveRecord::Base
     chips = game_player.chips
 
     str = []
-    str << identify
+    str << identity
     if game_player.position
       if chips.empty?
         str << "(#{placed(game, game_player)})"
@@ -53,22 +53,22 @@ class Player < ActiveRecord::Base
     player_game(game).exit_game
   end
 
-  def identify
+  def identity
     nickname || name
   end
 
-  def full_identify
+  def full_identity
     str = ''
     str << name
     str << " (#{nickname})" if nickname
     str
   end
 
-private
-
   def player_game(game)
     player_games.detect{ |pg| pg.game == game }
   end
+
+private
 
 
   def placed(game, game_player)

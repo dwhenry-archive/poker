@@ -17,7 +17,7 @@
         %td
           .actions
             = link_to 'Remove', game_player_path(@game.id, player), :title => 'Remove player', :method => 'delete'
-          = player.full_identify
+          = player.full_identity
 
 %table#non-players
   %thead
@@ -30,7 +30,7 @@
         %td
           .actions
             = link_to 'Add', game_players_path(@game, player_id: player.id), :title => 'Remove player', :method => 'post'
-          = player.full_identify
+          = player.full_identity
     %tr.player
       %td
         = form_tag url: game_players_path(@game) do
