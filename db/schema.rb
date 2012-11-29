@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121118190515) do
+ActiveRecord::Schema.define(:version => 20121129224102) do
 
   create_table "chips", :force => true do |t|
     t.integer  "game_player_id"
@@ -26,9 +26,10 @@ ActiveRecord::Schema.define(:version => 20121118190515) do
   create_table "game_players", :force => true do |t|
     t.integer  "game_id"
     t.integer  "player_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "position"
+    t.integer  "current_chips"
   end
 
   add_index "game_players", ["game_id"], :name => "index_game_players_on_game_id"
